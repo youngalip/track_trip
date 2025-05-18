@@ -17,6 +17,9 @@ dependencies:
   uuid: ^3.0.7                       # Generate UUID untuk ID unik
   cupertino_icons: ^1.0.8           # iOS-style icons
 
+flutter:
+  uses-material-design: true
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
