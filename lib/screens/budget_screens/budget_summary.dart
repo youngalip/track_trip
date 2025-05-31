@@ -12,7 +12,7 @@ import 'package:track_trip/widgets/common/empty_state.dart';
 import 'package:fl_chart/fl_chart.dart';
 
 class BudgetSummaryScreen extends StatefulWidget {
-  const BudgetSummaryScreen({Key? key}) : super(key: key);
+  const BudgetSummaryScreen({super.key});
 
   @override
   State<BudgetSummaryScreen> createState() => _BudgetSummaryScreenState();
@@ -292,53 +292,69 @@ class _BudgetSummaryScreenState extends State<BudgetSummaryScreen> {
     );
   }
 
-  Widget _buildBudgetList() {
-    return Consumer<BudgetProvider>(
-      builder: (context, budgetProvider, _) {
-        final budgets = budgetProvider.budgets;
-        
-        if (budgets.isEmpty) {
-          return const Padding(
-            padding: EdgeInsets.all(16.0),
-            child: EmptyState(
-              icon: Icons.account_balance_wallet,
-              message: AppStrings.noBudgetsYet,
-              actionText: 'Tambah Anggaran',
-            ),
-          );
-        }
-        
-        return Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Padding(
-              padding: EdgeInsets.all(16.0),
-              child: Text(
-                'Daftar Anggaran',
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
+// Di dalam method _buildBudgetList() di budget_summary.dart
+Widget _buildBudgetList() {
+  return Consumer<BudgetProvider>(
+    builder: (context, budgetProvider, _) {
+      final budgets = budgetProvider.budgets;
+      
+      if (budgets.isEmpty) {
+        return const Padding(
+          padding: EdgeInsets.all(16.0),
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(Icons.account_balance_wallet_outlined, size: 64, color: Colors.grey),
+                SizedBox(height: 16),
+                Text(
+                  'Belum ada anggaran yang dibuat',
+                  style: TextStyle(fontSize: 16, color: Colors.grey),
+                  textAlign: TextAlign.center,
                 ),
+              ],
+            ),
+          ),
+        );
+      }
+      
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Padding(
+            padding: EdgeInsets.all(16.0),
+            child: Text(
+              'Daftar Anggaran',
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
               ),
             ),
-            ListView.builder(
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              itemCount: budgets.length,
-              itemBuilder: (context, index) {
-                final budget = budgets[index];
-                return BudgetCard(
-                  budget: budget,
-                  onTap: () {
-                    // Navigasi ke detail anggaran
-                  },
-                );
-              },
-            ),
-          ],
-        );
-      },
-    );
-  }
+          ),
+          ListView.builder(
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            itemCount: budgets.length,
+            itemBuilder: (context, index) {
+              final budget = budgets[index];
+              return BudgetCard(
+                budget: budget,
+                onTap: () {
+                  // Navigasi ke detail anggaran atau edit
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => BudgetFormScreen(budget: budget),
+                    ),
+                  );
+                },
+              );
+            },
+          ),
+        ],
+      );
+    },
+  );
+}
 }

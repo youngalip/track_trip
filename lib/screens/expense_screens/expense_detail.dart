@@ -12,7 +12,7 @@ import 'package:track_trip/widgets/common/custom_button.dart';
 class ExpenseDetailScreen extends StatelessWidget {
   final Expense expense;
 
-  const ExpenseDetailScreen({Key? key, required this.expense}) : super(key: key);
+  const ExpenseDetailScreen({super.key, required this.expense});
 
   @override
   Widget build(BuildContext context) {

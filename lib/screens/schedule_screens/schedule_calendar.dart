@@ -7,7 +7,7 @@ import 'package:track_trip/constants/app_strings.dart';
 import 'package:track_trip/widgets/schedule_widgets/schedule_card.dart';
 
 class ScheduleCalendarScreen extends StatefulWidget {
-  const ScheduleCalendarScreen({Key? key}) : super(key: key);
+  const ScheduleCalendarScreen({super.key});
 
   @override
   State<ScheduleCalendarScreen> createState() => _ScheduleCalendarScreenState();

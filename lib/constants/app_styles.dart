@@ -71,7 +71,7 @@ class AppStyles {
       ),
       focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(8),
-        borderSide: BorderSide(color: AppColors.primaryColor, width: 2),
+        borderSide: const BorderSide(color: AppColors.primaryColor, width: 2),
       ),
       errorBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(8),
@@ -93,7 +93,7 @@ class AppStyles {
 
   static ButtonStyle secondaryButtonStyle = OutlinedButton.styleFrom(
     foregroundColor: AppColors.primaryColor,
-    side: BorderSide(color: AppColors.primaryColor),
+    side: const BorderSide(color: AppColors.primaryColor),
     padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 24),
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(8),

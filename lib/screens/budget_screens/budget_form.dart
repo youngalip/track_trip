@@ -9,11 +9,12 @@ import 'package:track_trip/widgets/common/custom_button.dart';
 import 'package:track_trip/widgets/common/custom_text_field.dart';
 import 'package:track_trip/utils/validators.dart';
 import 'package:intl/intl.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class BudgetFormScreen extends StatefulWidget {
   final Budget? budget; // Null jika menambah anggaran baru
 
-  const BudgetFormScreen({Key? key, this.budget}) : super(key: key);
+  const BudgetFormScreen({super.key, this.budget});
 
   @override
   State<BudgetFormScreen> createState() => _BudgetFormScreenState();
@@ -116,6 +117,7 @@ class _BudgetFormScreenState extends State<BudgetFormScreen> {
           // Update existing budget
           final updatedBudget = Budget(
             id: widget.budget!.id,
+            userId: FirebaseAuth.instance.currentUser?.uid ?? 'anonymous', // Tambahkan ini
             title: _titleController.text,
             amount: double.parse(_amountController.text),
             type: _selectedType,

@@ -1,18 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:track_trip/constants/app_colors.dart';
-import 'package:track_trip/constants/app_strings.dart';
 import 'package:track_trip/constants/app_styles.dart';
 import 'package:track_trip/providers/expense_provider.dart';
 import 'package:track_trip/providers/budget_provider.dart';
+import 'package:track_trip/providers/theme_provider.dart';
 import 'package:track_trip/widgets/common/custom_button.dart';
 import 'package:intl/intl.dart';
 
 class ProfilePage extends StatelessWidget {
-  const ProfilePage({Key? key}) : super(key: key);
+  const ProfilePage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Profil'),
@@ -22,7 +24,7 @@ class ProfilePage extends StatelessWidget {
           children: [
             _buildProfileHeader(),
             _buildStatistics(context),
-            _buildSettings(context),
+            _buildSettings(context, themeProvider),
           ],
         ),
       ),
@@ -64,7 +66,7 @@ class ProfilePage extends StatelessWidget {
           const SizedBox(height: 16),
           OutlinedButton(
             onPressed: () {
-              // Edit profile functionality would go here
+              // TODO: Implement edit profile functionality
             },
             style: OutlinedButton.styleFrom(
               foregroundColor: Colors.white,
@@ -83,7 +85,7 @@ class ProfilePage extends StatelessWidget {
       builder: (context, expenseProvider, budgetProvider, _) {
         final totalExpense = expenseProvider.getTotalExpenses();
         final totalBudget = budgetProvider.getTotalBudget();
-        
+
         return Padding(
           padding: const EdgeInsets.all(16),
           child: Column(
@@ -118,7 +120,7 @@ class ProfilePage extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 16),
-                            _buildStatCard(
+              _buildStatCard(
                 'Sisa Anggaran',
                 NumberFormat.currency(locale: 'id_ID', symbol: 'Rp ', decimalDigits: 0)
                     .format(totalBudget - totalExpense),
@@ -181,7 +183,7 @@ class ProfilePage extends StatelessWidget {
     );
   }
 
-  Widget _buildSettings(BuildContext context) {
+  Widget _buildSettings(BuildContext context, ThemeProvider themeProvider) {
     return Padding(
       padding: const EdgeInsets.all(16),
       child: Column(
@@ -197,15 +199,19 @@ class ProfilePage extends StatelessWidget {
             'Notifikasi',
             Icons.notifications,
             () {
-              // Navigate to notification settings
+              // TODO: Navigasi pengaturan notifikasi
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(content: Text('Pengaturan notifikasi belum tersedia')),
+              );
             },
           ),
-          _buildSettingItem(
+          _buildSettingItemWithSwitch(
             context,
-            'Tema Aplikasi',
+            'Tema Gelap',
             Icons.color_lens,
-            () {
-              // Navigate to theme settings
+            themeProvider.isDarkMode,
+            (value) {
+              themeProvider.toggleTheme();
             },
           ),
           _buildSettingItem(
@@ -213,7 +219,10 @@ class ProfilePage extends StatelessWidget {
             'Bahasa',
             Icons.language,
             () {
-              // Navigate to language settings
+              // TODO: Navigasi pengaturan bahasa
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(content: Text('Pengaturan bahasa belum tersedia')),
+              );
             },
           ),
           _buildSettingItem(
@@ -221,7 +230,10 @@ class ProfilePage extends StatelessWidget {
             'Privasi & Keamanan',
             Icons.security,
             () {
-              // Navigate to privacy settings
+              // TODO: Navigasi pengaturan privasi
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(content: Text('Pengaturan privasi belum tersedia')),
+              );
             },
           ),
           _buildSettingItem(
@@ -229,7 +241,10 @@ class ProfilePage extends StatelessWidget {
             'Bantuan & Dukungan',
             Icons.help,
             () {
-              // Navigate to help & support
+              // TODO: Navigasi bantuan & dukungan
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(content: Text('Bantuan belum tersedia')),
+              );
             },
           ),
           _buildSettingItem(
@@ -237,14 +252,21 @@ class ProfilePage extends StatelessWidget {
             'Tentang Aplikasi',
             Icons.info,
             () {
-              // Navigate to about app
+              showAboutDialog(
+                context: context,
+                applicationName: 'TrackTrip',
+                applicationVersion: '1.0.0',
+                applicationIcon: const FlutterLogo(size: 48),
+                children: const [
+                  Text('Aplikasi pengelolaan perjalanan dan keuangan untuk mahasiswa perantau.'),
+                ],
+              );
             },
           ),
           const SizedBox(height: 16),
           CustomButton(
             text: 'Keluar',
             onPressed: () {
-              // Logout functionality
               _showLogoutConfirmation(context);
             },
             backgroundColor: Colors.red,
@@ -255,29 +277,42 @@ class ProfilePage extends StatelessWidget {
     );
   }
 
-  Widget _buildSettingItem(
-      BuildContext context, String title, IconData icon, VoidCallback onTap) {
-    return InkWell(
-      onTap: onTap,
+  Widget _buildSettingItem(BuildContext context, String title, IconData icon, VoidCallback onTap) {
+    return Card(
+      margin: const EdgeInsets.only(bottom: 8),
+      child: InkWell(
+        onTap: onTap,
+        borderRadius: BorderRadius.circular(8),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+          child: Row(
+            children: [
+              Icon(icon, color: AppColors.primaryColor, size: 24),
+              const SizedBox(width: 16),
+              Text(title, style: AppStyles.bodyLarge),
+              const Spacer(),
+              const Icon(Icons.arrow_forward_ios, color: Colors.grey, size: 16),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildSettingItemWithSwitch(BuildContext context, String title, IconData icon, bool value, ValueChanged<bool> onChanged) {
+    return Card(
+      margin: const EdgeInsets.only(bottom: 8),
       child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 12),
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
         child: Row(
           children: [
-            Icon(
-              icon,
-              color: AppColors.primaryColor,
-              size: 24,
-            ),
+            Icon(icon, color: AppColors.primaryColor, size: 24),
             const SizedBox(width: 16),
-            Text(
-              title,
-              style: AppStyles.bodyLarge,
-            ),
-            const Spacer(),
-            const Icon(
-              Icons.arrow_forward_ios,
-              color: Colors.grey,
-              size: 16,
+            Expanded(child: Text(title, style: AppStyles.bodyLarge)),
+            Switch(
+              value: value,
+              onChanged: onChanged,
+              activeColor: AppColors.primaryColor,
             ),
           ],
         ),
@@ -293,16 +328,16 @@ class ProfilePage extends StatelessWidget {
         content: const Text('Apakah Anda yakin ingin keluar dari aplikasi?'),
         actions: [
           TextButton(
-            onPressed: () {
-              Navigator.of(ctx).pop();
-            },
+            onPressed: () => Navigator.of(ctx).pop(),
             child: const Text('Batal'),
           ),
           TextButton(
             onPressed: () {
-              // Perform logout
               Navigator.of(ctx).pop();
-              // Additional logout logic would go here
+              // TODO: Implement logout logic here
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(content: Text('Anda telah keluar')),
+              );
             },
             style: TextButton.styleFrom(foregroundColor: Colors.red),
             child: const Text('Keluar'),

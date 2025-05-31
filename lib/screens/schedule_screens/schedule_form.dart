@@ -6,11 +6,12 @@ import 'package:track_trip/constants/app_strings.dart';
 import 'package:track_trip/widgets/common/custom_button.dart';
 import 'package:track_trip/widgets/common/custom_text_field.dart';
 import 'package:intl/intl.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class ScheduleFormScreen extends StatefulWidget {
   final Schedule? schedule; // null untuk tambah baru
 
-  const ScheduleFormScreen({Key? key, this.schedule}) : super(key: key);
+  const ScheduleFormScreen({super.key, this.schedule});
 
   @override
   State<ScheduleFormScreen> createState() => _ScheduleFormScreenState();
@@ -99,6 +100,7 @@ class _ScheduleFormScreenState extends State<ScheduleFormScreen> {
     } else {
       final updatedSchedule = Schedule(
         id: widget.schedule!.id,
+        userId: FirebaseAuth.instance.currentUser?.uid ?? 'anonymous', // Tambahkan ini
         title: _titleController.text,
         description: _descriptionController.text,
         startTime: _startTime,
@@ -138,7 +140,7 @@ class _ScheduleFormScreenState extends State<ScheduleFormScreen> {
               ),
               const SizedBox(height: 16),
               SwitchListTile(
-                title: Text(AppStrings.allDay),
+                title: const Text(AppStrings.allDay),
                 value: _isAllDay,
                 onChanged: (val) {
                   setState(() {

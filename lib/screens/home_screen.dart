@@ -13,7 +13,7 @@ import 'package:track_trip/constants/app_strings.dart';
 
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+  const HomeScreen({super.key});
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();

@@ -5,7 +5,7 @@ import 'package:track_trip/widgets/schedule_widgets/schedule_card.dart';
 import 'package:track_trip/constants/app_strings.dart';
 
 class ScheduleListScreen extends StatelessWidget {
-  const ScheduleListScreen({Key? key}) : super(key: key);
+  const ScheduleListScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

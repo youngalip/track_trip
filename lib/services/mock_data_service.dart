@@ -17,6 +17,7 @@ class MockDataService {
     return [
       Expense(
         id: uuid.v4(),
+        userId: 'mock-user', // Tambahkan ini
         title: 'Makan Siang',
         amount: 35000,
         date: DateTime(now.year, now.month, now.day, 12, 30),
@@ -26,6 +27,7 @@ class MockDataService {
       Expense(
         id: uuid.v4(),
         title: 'Transportasi Ojek Online',
+        userId: 'mock-user', // Tambahkan ini
         amount: 25000,
         date: DateTime(now.year, now.month, now.day, 8, 15),
         category: 'Transportasi',
@@ -33,6 +35,7 @@ class MockDataService {
       ),
       Expense(
         id: uuid.v4(),
+        userId: 'mock-user', // Tambahkan ini
         title: 'Beli Buku',
         amount: 75000,
         date: DateTime(now.year, now.month, now.day, 15, 0),
@@ -41,6 +44,7 @@ class MockDataService {
       ),
       Expense(
         id: uuid.v4(),
+        userId: 'mock-user', // Tambahkan ini
         title: 'Nonton Film',
         amount: 50000,
         date: DateTime(now.year, now.month, now.day - 1, 19, 0),
@@ -49,6 +53,7 @@ class MockDataService {
       ),
       Expense(
         id: uuid.v4(),
+        userId: 'mock-user', // Tambahkan ini
         title: 'Belanja Bulanan',
         amount: 150000,
         date: DateTime(now.year, now.month, now.day - 2, 10, 0),
@@ -70,6 +75,7 @@ class MockDataService {
     return [
       Budget(
         id: uuid.v4(),
+        userId: 'mock-user', // Tambahkan ini
         title: 'Anggaran Makanan',
         amount: 1000000,
         type: BudgetType.monthly,
@@ -79,6 +85,7 @@ class MockDataService {
       ),
       Budget(
         id: uuid.v4(),
+        userId: 'mock-user', // Tambahkan ini
         title: 'Transportasi Harian',
         amount: 30000,
         type: BudgetType.daily,
@@ -87,6 +94,7 @@ class MockDataService {
       ),
       Budget(
         id: uuid.v4(),
+        userId: 'mock-user', // Tambahkan ini
         title: 'Hiburan Mingguan',
         amount: 150000,
         type: BudgetType.weekly,
@@ -107,6 +115,7 @@ class MockDataService {
     return [
       Schedule(
         id: uuid.v4(),
+        userId: 'mock-user', // Tambahkan ini
         title: 'Kuliah Pemrograman Mobile',
         description: 'Kelas di Gedung A Ruang 303',
         startTime: DateTime(now.year, now.month, now.day, 8, 0),
@@ -115,6 +124,7 @@ class MockDataService {
       ),
       Schedule(
         id: uuid.v4(),
+        userId: 'mock-user', // Tambahkan ini
         title: 'Rapat Kelompok Tugas',
         description: 'Diskusi proyek akhir semester',
         startTime: DateTime(now.year, now.month, now.day, 13, 0),
@@ -123,6 +133,7 @@ class MockDataService {
       ),
       Schedule(
         id: uuid.v4(),
+        userId: 'mock-user', // Tambahkan ini
         title: 'Seminar Teknologi',
         description: 'Seminar tentang perkembangan AI terbaru',
         startTime: DateTime(now.year, now.month, now.day + 1, 9, 0),
@@ -132,6 +143,7 @@ class MockDataService {
       ),
       Schedule(
         id: uuid.v4(),
+        userId: 'mock-user', // Tambahkan ini
         title: 'Liburan Akhir Semester',
         description: 'Perjalanan ke pantai bersama teman-teman',
         startTime: DateTime(now.year, now.month, now.day + 10),

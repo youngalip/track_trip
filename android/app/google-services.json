@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "830186307120",
+    "project_id": "track-trip-firebase",
+    "storage_bucket": "track-trip-firebase.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:830186307120:android:662c443dfb6434205fb7f5",
+        "android_client_info": {
+          "package_name": "com.example.tracktrip"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC6aWaHqaH0poN9Yc6_Pu1vtz5RECo4SHs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -16,7 +16,7 @@ class CustomTextField extends StatelessWidget {
   final bool enabled;
 
   const CustomTextField({
-    Key? key,
+    super.key,
     required this.controller,
     required this.labelText,
     this.hintText,
@@ -29,7 +29,7 @@ class CustomTextField extends StatelessWidget {
     this.maxLength,
     this.onChanged,
     this.enabled = true,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -47,8 +47,8 @@ class CustomTextField extends StatelessWidget {
           borderRadius: const BorderRadius.all(Radius.circular(8)),
           borderSide: BorderSide(color: Colors.grey[400]!),
         ),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: const BorderRadius.all(Radius.circular(8)),
+        focusedBorder: const OutlineInputBorder(
+          borderRadius: BorderRadius.all(Radius.circular(8)),
           borderSide: BorderSide(color: AppColors.primaryColor, width: 2),
         ),
         errorBorder: const OutlineInputBorder(

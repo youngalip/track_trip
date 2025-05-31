@@ -11,7 +11,7 @@ import 'package:track_trip/widgets/expense_widgets/expense_card.dart';
 import 'package:track_trip/widgets/common/empty_state.dart';
 
 class ExpenseListScreen extends StatefulWidget {
-  const ExpenseListScreen({Key? key}) : super(key: key);
+  const ExpenseListScreen({super.key});
 
   @override
   State<ExpenseListScreen> createState() => _ExpenseListScreenState();

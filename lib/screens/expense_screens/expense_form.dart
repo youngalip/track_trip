@@ -9,7 +9,7 @@ import 'package:track_trip/utils/validators.dart';
 import 'package:intl/intl.dart';
 
 class ExpenseFormScreen extends StatefulWidget {
-  const ExpenseFormScreen({Key? key}) : super(key: key);
+  const ExpenseFormScreen({super.key});
 
   @override
   State<ExpenseFormScreen> createState() => _ExpenseFormScreenState();
