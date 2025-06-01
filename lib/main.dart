@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_core/firebase_core.dart';
 
-import 'package:track_trip/providers/auth_provider.dart';       
+import 'package:track_trip/providers/auth_provider.dart';
 import 'package:track_trip/providers/budget_provider.dart';
 import 'package:track_trip/providers/expense_provider.dart';
 import 'package:track_trip/providers/schedule_provider.dart';
 import 'package:track_trip/providers/theme_provider.dart';
 
 import 'package:track_trip/screens/home_screen.dart';
-import 'package:track_trip/screens/auth/login_screen.dart';            
-import 'package:track_trip/screens/auth/register_screen.dart';        // Import RegisterScreen
-import 'package:track_trip/screens/profile_screens/profile_page.dart';            
+import 'package:track_trip/screens/auth/login_screen.dart';
+import 'package:track_trip/screens/auth/register_screen.dart'; // Import RegisterScreen
+import 'package:track_trip/screens/profile_screens/profile_page.dart';
 
 import 'package:track_trip/constants/app_colors.dart';
 import 'package:track_trip/constants/app_styles.dart';
@@ -115,14 +115,13 @@ class MyApp extends StatelessWidget {
             ),
             themeMode: themeProvider.themeMode,
 
-            // Route awal ditentukan berdasar login
-            home: authProvider.isLoggedIn ? const ProfilePage() : const LoginScreen(),
+            home: authProvider.isLoggedIn ? const HomeScreen() : const LoginScreen(),
 
             routes: {
               '/login': (context) => const LoginScreen(),
               '/register': (context) => const RegisterScreen(),
               '/profile': (context) => const ProfilePage(),
-              // Tambahkan route lain jika ada
+              '/home': (context) => const HomeScreen(),
             },
 
             debugShowCheckedModeBanner: false,
